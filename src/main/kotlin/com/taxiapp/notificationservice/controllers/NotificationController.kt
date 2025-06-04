@@ -13,7 +13,7 @@ class NotificationController(
     @PostMapping("/email")
     fun sendEmail(@RequestBody emailRequest: EmailSendRequestTO) : ResponseEntity<Any> {
         val result = emailService.pushEmailToQueue(emailRequest)
-
+        println("Sending email to queue: $result")
         return if (result.isSuccess()) {
             ResponseEntity.ok(null)
         } else {
