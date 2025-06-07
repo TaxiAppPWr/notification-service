@@ -22,12 +22,11 @@ class EmailServiceImpl(
                 body = emailRequest.body
             )
         )
-        return ResultTO(httpStatus = HttpStatus.OK)
+        return ResultTO(httpStatus = HttpStatus.CREATED)
     }
 
-    override fun sendEmail(event: SendEmailRequestEvent): ResultTO {
+    override fun sendEmail(event: SendEmailRequestEvent) {
         println("Email sending not implemented")
 //        TODO("Not yet implemented")
-        return ResultTO(httpStatus = HttpStatus.OK)
     }
 }

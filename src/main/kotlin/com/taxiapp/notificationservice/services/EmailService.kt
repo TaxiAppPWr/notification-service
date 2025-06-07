@@ -7,5 +7,5 @@ import com.taxiapp.notificationservice.dto.http.ResultTO
 interface EmailService {
     fun pushEmailToQueue(emailRequest: EmailSendRequestTO): ResultTO
 
-    fun sendEmail(event: SendEmailRequestEvent): ResultTO
+    fun sendEmail(event: SendEmailRequestEvent)
 }
