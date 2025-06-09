@@ -27,6 +27,6 @@ class EmailServiceImpl(
 
     override fun sendEmail(event: SendEmailRequestEvent) {
         println("Email sending not implemented")
-//        TODO("Not yet implemented")
+        // TODO: Implement email sending logic here - e.g. MailTrap
     }
 }
