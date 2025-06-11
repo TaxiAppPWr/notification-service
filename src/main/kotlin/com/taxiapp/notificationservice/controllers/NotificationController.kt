@@ -2,6 +2,7 @@ package com.taxiapp.notificationservice.controllers
 
 import com.taxiapp.notificationservice.dto.http.EmailSendRequestTO
 import com.taxiapp.notificationservice.dto.http.PushSendRequestTO
+import com.taxiapp.notificationservice.dto.http.TokenRequest
 import com.taxiapp.notificationservice.services.EmailService
 import com.taxiapp.notificationservice.services.PushService
 import org.springframework.http.ResponseEntity
@@ -14,8 +15,8 @@ class NotificationController(
     private val pushService: PushService,
 ) {
     @PostMapping("/user/token")
-    fun registerUserToken(@RequestParam token: String, @RequestHeader("username") username: String): ResponseEntity<Any> {
-        val result = pushService.createEndpoint(token, username)
+    fun registerUserToken(@RequestBody request: TokenRequest, @RequestHeader("username") username: String): ResponseEntity<Any> {
+        val result = pushService.createEndpoint(request.token, username)
         return ResponseEntity.status(result.httpStatus).body(result.messages)
     }
 
