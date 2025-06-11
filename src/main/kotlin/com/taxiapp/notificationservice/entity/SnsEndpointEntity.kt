@@ -18,11 +18,11 @@ class SnsEndpointEntity(
     var id: Long = 0,
 
     @Column
-    var username: String,
+    var username: String = "",
 
     @Column
-    var token: String,
+    var token: String = "",
 
     @Column
-    var endpointArn: String,
+    var endpointArn: String = "",
 )

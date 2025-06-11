@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class AwsConfig(
-    @Value("\${aws.region:us-east-1}") private val awsRegion: String = "us-east-1"
+    @Value("\${aws.region:us-east-1}") private val awsRegion: String
 ) {
     @Bean
     fun snsClient(): SnsClient {
