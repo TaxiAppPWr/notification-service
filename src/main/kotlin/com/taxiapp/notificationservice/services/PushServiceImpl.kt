@@ -83,8 +83,8 @@ class PushServiceImpl(
           "fcmV1Message": {
             "message": {
               "data": {
-                "title": ${event.title},
-                "body": ${event.body}
+                "title": "${event.title}",
+                "body": "${event.body}"
               },
             }
           }
