@@ -3,7 +3,7 @@ name: Build, Push and Update Image in EKS
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   AWS_REGION: us-east-1
