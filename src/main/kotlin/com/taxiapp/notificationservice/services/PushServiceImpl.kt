@@ -85,7 +85,7 @@ class PushServiceImpl(
               "data": {
                 "title": "${event.title}",
                 "body": "${event.body}"
-              },
+              }
             }
           }
         }""".trimIndent()
