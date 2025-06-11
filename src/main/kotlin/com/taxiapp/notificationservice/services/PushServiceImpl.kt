@@ -80,14 +80,16 @@ class PushServiceImpl(
             return
         }
         val payload = """{
-          "fcmV1Message": {
-            "message": {
-              "data": {
-                "title": "${event.title}",
-                "body": "${event.body}"
+            "GCM": {
+              "fcmV1Message": {
+                "message": {
+                  "data": {
+                    "title": "${event.title}",
+                    "body": "${event.body}"
+                  }
+                }
               }
             }
-          }
         }""".trimIndent()
         runBlocking {
             endpoints.forEach { endpoint ->
