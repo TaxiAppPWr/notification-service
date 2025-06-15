@@ -14,6 +14,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 @Service
 class PushServiceImpl(
@@ -79,13 +81,25 @@ class PushServiceImpl(
         if (endpoints.isEmpty()) {
             return
         }
-        val payload = "\"{ \\\"fcmV1Message\\\": { \\\"message\\\": { \\\"notification\\\": { \\\"title\\\": \\\"${event.title}\\\", \\\"body\\\": \\\"${event.body}\\\" } } } }\"".trimIndent()
+        val payloadMap = mapOf(
+            "GCM" to mapOf(
+                "fcmV1Message" to mapOf(
+                    "message" to mapOf(
+                        "notification" to mapOf(
+                            "title" to event.title,
+                            "body" to event.body
+                        )
+                    )
+                )
+            )
+        )
+        val payload = Json.encodeToString(payloadMap)
         runBlocking {
             endpoints.forEach { endpoint ->
                 val publishRequest = PublishRequest {
                     targetArn = endpoint.endpointArn
                     messageStructure = "json"
-                    message = """{"GCM":${payload.trim()}}"""
+                    message = payload
                 }
                 snsClient.publish(publishRequest)
             }
