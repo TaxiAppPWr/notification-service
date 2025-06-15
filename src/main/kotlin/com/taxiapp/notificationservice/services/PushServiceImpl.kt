@@ -82,24 +82,27 @@ class PushServiceImpl(
             return
         }
         val payloadMap = mapOf(
-            "GCM" to mapOf(
-                "fcmV1Message" to mapOf(
-                    "message" to mapOf(
-                        "notification" to mapOf(
-                            "title" to event.title,
-                            "body" to event.body
-                        )
+            "fcmV1Message" to mapOf(
+                "message" to mapOf(
+                    "notification" to mapOf(
+                        "title" to event.title,
+                        "body" to event.body
                     )
                 )
             )
         )
         val payload = Json.encodeToString(payloadMap)
+        val messageMap = mapOf(
+            "GCM" to payload,
+        )
+        val messageValue = Json.encodeToString(messageMap)
+        println("Sending push notification to ${endpoints.size} endpoints: $messageValue")
         runBlocking {
             endpoints.forEach { endpoint ->
                 val publishRequest = PublishRequest {
                     targetArn = endpoint.endpointArn
                     messageStructure = "json"
-                    message = payload
+                    message = messageValue
                 }
                 snsClient.publish(publishRequest)
             }
