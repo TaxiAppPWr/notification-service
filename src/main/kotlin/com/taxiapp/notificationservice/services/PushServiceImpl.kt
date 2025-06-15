@@ -79,7 +79,7 @@ class PushServiceImpl(
         if (endpoints.isEmpty()) {
             return
         }
-        val payload = """"{ \"fcmV1Message\": { \"message\": { \"data\": { \"title\": \"${event.title}\", \"body\": \"${event.body}\" } } } }"""".trimIndent()
+        val payload = "\"{ \\\"fcmV1Message\\\": { \\\"message\\\": { \\\"notification\\\": { \\\"title\\\": \\\"${event.title}\\\", \\\"body\\\": \\\"${event.body}\\\" } } } }\"".trimIndent()
         runBlocking {
             endpoints.forEach { endpoint ->
                 val publishRequest = PublishRequest {
